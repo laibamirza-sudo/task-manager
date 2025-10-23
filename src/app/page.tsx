@@ -16,12 +16,11 @@ type Task = {
   id: number;
   title: string;
   completed: boolean;
-  createdAt: string; // Change to string
+  createdAt: string;
 };
 
 export default async function HomePage() {
   const tasksRaw = await prisma.task.findMany({ orderBy: { createdAt: "desc" } });
-  // Format createdAt as ISO string
   const tasks: Task[] = tasksRaw.map(task => ({
     ...task,
     createdAt: task.createdAt.toISOString(),

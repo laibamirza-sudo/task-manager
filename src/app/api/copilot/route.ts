@@ -10,6 +10,7 @@ import {
   deleteTask,
   clearCompletedTasks,
   completeAlltasks,
+  getAllTasks,
 } from "@/app/actions/taskActions";
 
 const copilotActions = [
@@ -23,7 +24,7 @@ const copilotActions = [
       await createTask(formData);
       return { message: `Created task '${title}'` };
     },
-  },
+  }, 
   {
     name: "toggleTask",
     description: "Toggle a task’s completion state",
@@ -65,6 +66,15 @@ const copilotActions = [
       return { message: "All incomplete tasks marked as completed" };
     },
   },
+  {
+  name: "getAllTasks",
+  description: "Retrieve all tasks from the database",
+  parameters: [],
+  handler: async () => {
+    const tasks = await getAllTasks();
+    return { tasks };
+  },
+}
 ];
 
 // Initialize Copilot runtime and adapter 

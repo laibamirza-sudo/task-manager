@@ -3,6 +3,13 @@
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
   
+
+export async function getAllTasks() {
+  return await prisma.task.findMany({
+    orderBy: { createdAt: "desc" },
+  });
+}
+
 export async function createTask(formData: FormData) {
   const title = (formData.get("title") as string) || "";2
   if (!title.trim()) return;
